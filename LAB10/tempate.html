@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="./assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./assets/css/custom.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <!--<a href="#" class="btn btn-pri">SAVE</a>-->
+    <div class="container">
+        <div class="row">
+            <div class="col-4">
+                <nav class="navbar nav-left bg-light">
+                    <a class="navbar-brand w-100" href="#">Home</a>
+                    <a class="navbar-brand w-100" href="#">About</a>
+                    <a class="navbar-brand w-100" href="#">content</a>
+                </nav>
+            </div>
+
+            <div class="col-8">
+                <div class="row b-5">
+                    <div class="col-12 bg-primary">1</div>
+                </div>
+                <div class="row b-5">
+                    <div class="col-6 bg-warning">2</div>
+                    <div class="col-6 bg-primary">2</div>
+                </div>
+                <div class="row b-5">
+                    <div class="col-3 bg-primary">3</div>
+                    <div class="col-6 bg-info">3</div>
+                    <div class="col-3 bg-warning">3</div>
+                </div>
+            </div>
+            <button class="btn_load" type="button" data="one">ONE</button>
+            <button class="btn_load" type="button" data="two">TWO</button>
+            <button class="btn_load" type="button" data="data">API</button>
+            <button class="btn_load" type="button" data="data-table">DATA-TABLE</button>
+            <div id="div_load"></div>
+
+
+            <script src="./assets/js/bootstrap.min.js"></script>
+            <script src="./assets/js/jquery-min.js"></script>
+
+</body>
+
+</html>
+<script>
+    $(function() {
+        //alert();
+        $(".btn_load").click(function() {
+            let data = $(this).attr("data");
+            //alert(data);
+            file = "./views/tempate/" + data + ".html";
+            $("#div_load").load(file);
+        });
+        $("[data='data']").click(function() {
+            $.ajax({
+                method: "GET",
+                url: "./models/tempate/list_data.php",
+                data: {},
+                success: function(msg) {
+                    $("#div_load").text(msg);
+                }
+            });
+        });
+        $("[data='data-table']").click(function() {
+            $.ajax({
+                method: "GET",
+                url: "./models/tempate/list_data_table.php",
+                data: {},
+                success: function(msg) {
+                    $("#div_load").html(msg);
+                }
+            });
+        });
+    });
+</script>
